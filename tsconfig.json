@@ -18,6 +18,13 @@
 
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
+    "paths": {
+      // ts去src目录下找
+      // 在monorepo中，直接修改依赖子包里的文件并获得最新的文件内容，而不用重新编译
+      "shared": ["packages/shared/src"],
+      // 为了不让 hostConfig 被限制在 react-reconciler
+      "hostConfig": ["packages/react-reconciler/src/hostConfig.ts"]
+    },
 
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
