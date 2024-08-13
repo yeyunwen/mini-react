@@ -1,14 +1,10 @@
 {
-  "name": "react",
+  "name": "shared",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "shared": "workspace:*"
-  },
+  "type": "module",
+  "main": "./dist/index.cjs.js",
+  "module": "./src/index.esm.js",
   "files": [
     "dist"
   ],
@@ -20,5 +16,11 @@
       "require": "./dist/index.cjs.js"
     },
     "./*": "./*"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
