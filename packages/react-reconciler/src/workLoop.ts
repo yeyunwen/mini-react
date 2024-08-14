@@ -22,6 +22,7 @@ const createWorkInProgress = (
     // update
     wip.pendingProps = pendingProps;
     wip.flags = NoFlags;
+    wip.subtreeFlags = NoFlags;
   }
   wip.type = current.type;
   wip.updateQueue = current.updateQueue;
@@ -94,9 +95,18 @@ const renderRoot = (root: FiberRootNode) => {
       workLoop();
       break;
     } catch (error) {
-      console.warn(error);
+      if (__DEV__) {
+        console.warn(error);
+      }
       workInProgress = null;
     }
     // eslint-disable-next-line no-constant-condition
   } while (true);
+  const finishedWork = root.current.alternate;
+  root.finishedWork = finishedWork;
+
+  commitRoot(root);
 };
+function commitRoot(root: FiberRootNode) {
+  throw new Error("Function not implemented.");
+}

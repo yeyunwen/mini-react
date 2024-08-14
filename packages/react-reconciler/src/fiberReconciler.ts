@@ -1,7 +1,13 @@
 import { Container } from "hostConfig";
 import { FiberNode, FiberRootNode } from "./fiber";
 import { HostRoot } from "./workTags";
-import { createUpdate, createUpdateQueue, enqueueUpdate } from "./updateQueue";
+import {
+  createUpdate,
+  createUpdateQueue,
+  enqueueUpdate,
+  Update,
+  UpdateQueue,
+} from "./updateQueue";
 import { ReactElementType } from "shared";
 import { shcheduleUpdateOnFiber } from "./workLoop";
 
@@ -18,7 +24,7 @@ export const updateContainer = (
 ) => {
   const hostRootRiber = root.current;
   const update = createUpdate<ReactElementType | null>(element);
-  enqueueUpdate(hostRootRiber.updateQueue, update);
+  enqueueUpdate(hostRootRiber.updateQueue as UpdateQueue<any>, update);
   shcheduleUpdateOnFiber(hostRootRiber);
   return element;
 };

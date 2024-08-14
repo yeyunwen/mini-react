@@ -10,14 +10,14 @@ export default tsLint.config(
     },
   },
   pluginJs.configs.recommended,
-  // TypeScript files
   ...tsLint.configs.recommended.map((config) => {
     return {
       ...config,
       rules: {
+        ...config.rules,
         "@typescript-eslint/no-explicit-any": "off",
-        // 我们只对 js 文件进行 `no-unused-vars` 检查，TS 文件由 TypeScript 本身检查。
-        "no-unused-vars": ["error", { vars: "all", args: "none" }],
+        "@typescript-eslint/no-unsafe-function-type": "off",
+        "@typescript-eslint/no-unused-vars": "off",
       },
     };
   }),
