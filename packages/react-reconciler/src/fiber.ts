@@ -6,7 +6,7 @@ import {
   isString,
   isFunction,
 } from "shared";
-import { HostComponent, WorkTag } from "./workTags";
+import { FunctionComponent, HostComponent, WorkTag } from "./workTags";
 import { Flags, NoFlags } from "./fiberFlags";
 import { Container } from "hostConfig";
 import { UpdateQueue } from "./updateQueue";
@@ -94,8 +94,12 @@ export const createFiberFormElement = (
   if (isString(type)) {
     // <div> type: 'div'
     fiberTag = HostComponent;
-  } else if (!isFunction(type) && __DEV__) {
-    console.warn("未定义的type 类型", element);
+  } else if (isFunction(type)) {
+    fiberTag = FunctionComponent;
+  } else {
+    if (__DEV__) {
+      console.warn("未定义的type 类型", element);
+    }
   }
   const fiber = new FiberNode(fiberTag, props, key);
   fiber.type = type;

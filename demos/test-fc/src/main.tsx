@@ -1,9 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const App = <div>Hello World</div>;
+const App = () => {
+  return (
+    <div>
+      <Child />
+    </div>
+  );
+};
 
-ReactDOM.createRoot(document.getElementById("root")).render(App);
+const Child = () => {
+  return <div>Child</div>;
+};
 
-console.log(App);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+console.log(<App />);
 console.log(ReactDOM);

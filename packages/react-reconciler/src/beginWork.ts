@@ -1,7 +1,13 @@
 import { mountChildFibers, reconcileChildFibers } from "./childFiber";
 import { FiberNode } from "./fiber";
+import { renderWithHooks } from "./fiberHooks";
 import { processUpdateQueue, UpdateQueue } from "./updateQueue";
-import { HostComponent, HostRoot, HostText } from "./workTags";
+import {
+  FunctionComponent,
+  HostComponent,
+  HostRoot,
+  HostText,
+} from "./workTags";
 
 export const beginWork = (fiber: FiberNode) => {
   switch (fiber.tag) {
@@ -13,6 +19,9 @@ export const beginWork = (fiber: FiberNode) => {
     }
     case HostText: {
       return null;
+    }
+    case FunctionComponent: {
+      return updateFunctionComponent(fiber);
     }
     default: {
       if (__DEV__) {
@@ -41,6 +50,13 @@ export const updateHostComponent = (wip: FiberNode) => {
   const nextProps = wip.pendingProps;
   const nextChlidren = nextProps.children;
   reconcileChildren(wip, nextChlidren);
+
+  return wip.child;
+};
+
+export const updateFunctionComponent = (wip: FiberNode) => {
+  const nextChildren = renderWithHooks(wip);
+  reconcileChildren(wip, nextChildren);
 
   return wip.child;
 };

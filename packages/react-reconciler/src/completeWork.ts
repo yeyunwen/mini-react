@@ -5,7 +5,12 @@ import {
   Instance,
 } from "hostConfig";
 import { FiberNode } from "./fiber";
-import { HostComponent, HostRoot, HostText } from "./workTags";
+import {
+  FunctionComponent,
+  HostComponent,
+  HostRoot,
+  HostText,
+} from "./workTags";
 import { NoFlags } from "./fiberFlags";
 
 export const appendAllChildren = (parent: Instance, wip: FiberNode) => {
@@ -26,13 +31,14 @@ export const appendAllChildren = (parent: Instance, wip: FiberNode) => {
       if (node.return === null || node.return === wip) {
         return;
       }
+      node = node?.return;
     }
     node.sibling.return = node.return;
     node = node.sibling;
   }
 };
 
-export const completeWork = (wip: FiberNode): FiberNode => {
+export const completeWork = (wip: FiberNode) => {
   const newProps = wip.pendingProps;
   const current = wip.alternate;
 
@@ -50,9 +56,9 @@ export const completeWork = (wip: FiberNode): FiberNode => {
         wip.stateNode = instance;
       }
       bubbleUpProperties(wip);
-      break;
+      return null;
     }
-    case HostText:
+    case HostText: {
       if (current !== null && wip.stateNode) {
         // update
       } else {
@@ -63,14 +69,23 @@ export const completeWork = (wip: FiberNode): FiberNode => {
         wip.stateNode = instance;
       }
       bubbleUpProperties(wip);
-      break;
-    case HostRoot:
+      return null;
+    }
+    case HostRoot: {
       bubbleUpProperties(wip);
+      return null;
+    }
+    case FunctionComponent: {
+      bubbleUpProperties(wip);
+      return null;
+    }
+    default: {
+      if (__DEV__) {
+        console.warn(`completeWork: 未知 fiber tag: ${wip.tag}`);
+      }
       break;
-    default:
-      break;
+    }
   }
-  return wip;
 };
 
 // 后续更新，就不需要全部遍历来找到要改变的flag
