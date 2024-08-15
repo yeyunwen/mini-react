@@ -19,6 +19,7 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs.js"
     },
+    "./jsx-dev-runtime": "./dist/index.esm.js",
     "./*": "./*"
   }
 }
