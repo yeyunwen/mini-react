@@ -19,6 +19,7 @@ export const getHostParent = (fiber: FiberNode) => {
   if (__DEV__) {
     console.warn("getHostParent: 未知的 fiber tag", fiber.tag);
   }
+  return null;
 };
 
 export const appendPlacementNodeToContainer = (
@@ -45,7 +46,9 @@ export const commitPlacement = (finishedWork: FiberNode) => {
     console.warn("执行Placement", finishedWork);
   }
   const hostParent = getHostParent(finishedWork);
-  appendPlacementNodeToContainer(finishedWork.stateNode, hostParent);
+  if (hostParent !== null) {
+    appendPlacementNodeToContainer(finishedWork, hostParent);
+  }
 };
 
 export const commitMutationEffectsOnFiber = (finishedWork: FiberNode) => {

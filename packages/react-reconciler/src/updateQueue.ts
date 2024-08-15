@@ -35,7 +35,7 @@ export const processUpdateQueue = <State>(
   baseState: State,
   pendingUpdate: Update<State> | null,
 ): { memoizedState: State } => {
-  let result: ReturnType<typeof processUpdateQueue<State>> = {
+  const result: ReturnType<typeof processUpdateQueue<State>> = {
     memoizedState: baseState,
   };
 

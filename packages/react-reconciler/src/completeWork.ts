@@ -2,12 +2,13 @@ import {
   appendInitialChild,
   createInstance,
   createTextInstance,
+  Instance,
 } from "hostConfig";
 import { FiberNode } from "./fiber";
 import { HostComponent, HostRoot, HostText } from "./workTags";
 import { NoFlags } from "./fiberFlags";
 
-export const appendAllChildren = (parent: FiberNode, wip: FiberNode) => {
+export const appendAllChildren = (parent: Instance, wip: FiberNode) => {
   let node = wip.child;
   while (node !== null) {
     if (node.tag === HostComponent || node.tag === HostText) {
@@ -57,7 +58,7 @@ export const completeWork = (wip: FiberNode): FiberNode => {
       } else {
         // mount
         // 1. 构建DOM
-        const instance = createTextInstance(wip.type, newProps);
+        const instance = createTextInstance(wip.pendingProps.content);
         // 3. 更新stateNode
         wip.stateNode = instance;
       }

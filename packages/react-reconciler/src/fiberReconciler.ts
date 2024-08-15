@@ -5,7 +5,6 @@ import {
   createUpdate,
   createUpdateQueue,
   enqueueUpdate,
-  Update,
   UpdateQueue,
 } from "./updateQueue";
 import { ReactElementType } from "shared";

@@ -2,13 +2,18 @@
   "name": "react-reconciler",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "module": "./dist/index.esm.js",
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs.js"
+    },
+    "./*": "./*"
+  },
   "dependencies": {
     "shared": "workspace:*"
   }

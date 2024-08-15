@@ -23,7 +23,8 @@
       // 在monorepo中，直接修改依赖子包里的文件并获得最新的文件内容，而不用重新编译
       "shared": ["packages/shared/src"],
       // 为了不让 hostConfig 被限制在 react-reconciler
-      "hostConfig": ["packages/react-reconciler/src/hostConfig.ts"]
+      "hostConfig": ["packages/react-dom/src/hostConfig.ts"],
+      "react-reconciler": ["packages/react-reconciler/src"]
     },
 
     /* Completeness */
