@@ -24,7 +24,8 @@
       "shared": ["packages/shared/src"],
       // 为了不让 hostConfig 被限制在 react-reconciler
       "hostConfig": ["packages/react-dom/src/hostConfig.ts"],
-      "react-reconciler": ["packages/react-reconciler/src"]
+      "react-reconciler": ["packages/react-reconciler/src"],
+      "react": ["packages/react/src"]
     },
 
     /* Completeness */

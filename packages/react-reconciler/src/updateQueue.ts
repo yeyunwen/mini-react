@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { Action, isFunction } from "shared";
 
 export interface Update<State> {
@@ -8,6 +9,7 @@ export interface UpdateQueue<State> {
   shared: {
     pending: Update<State> | null;
   };
+  dispatch: Dispatch<State> | null;
 }
 
 export const createUpdate = <State>(aciton: Action<State>): Update<State> => {
@@ -21,6 +23,7 @@ export const createUpdateQueue = <State>(): UpdateQueue<State> => {
     shared: {
       pending: null,
     },
+    dispatch: null,
   };
 };
 

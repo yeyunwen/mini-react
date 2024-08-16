@@ -51,7 +51,7 @@ export const markUpdateFormFiberToRoot = (fiber: FiberNode) => {
   return null;
 };
 
-export const shcheduleUpdateOnFiber = (fiber: FiberNode) => {
+export const scheduleUpdateOnFiber = (fiber: FiberNode) => {
   const root = markUpdateFormFiberToRoot(fiber);
   renderRoot(root);
 };

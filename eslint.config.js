@@ -18,6 +18,7 @@ export default tsLint.config(
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unsafe-function-type": "off",
         "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
       },
     };
   }),
